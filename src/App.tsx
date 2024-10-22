@@ -16,13 +16,6 @@ export type Produto = {
 function App() {
   const [favoritos, setFavoritos] = useState<Produto[]>([]) // Estado dos favoritos
 
-  // // Carregar os produtos (por exemplo, a partir de uma API)
-  // useEffect(() => {
-  //   fetch('https://fake-api-tau.vercel.app/api/ebac_sports')
-  //     .then((res) => res.json())
-  //     .then((data) => setProdutos(data))
-  // }, [])
-
   // Função para favoritar ou desfavoritar um produto
   const favoritar = (produto: Produto) => {
     if (favoritos.some(fav => fav.id === produto.id)) {
