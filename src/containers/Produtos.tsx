@@ -1,43 +1,39 @@
-import { Produto as ProdutoType } from '../App'
-import Produto from '../components/Produto'
-import { useGetProdutosQuery } from '../services/api'
-
-import * as S from './styles'
+import { Produto as ProdutoType } from "../App";
+import Produto from "../components/Produto";
+import { useGetProdutosQuery } from "../services/api";
+import * as S from "./styles";
 
 type Props = {
-  favoritos: ProdutoType[]
-  favoritar: (produto: ProdutoType) => void
-}
+  favoritos: ProdutoType[];
+  favoritar: (produto: ProdutoType) => void;
+};
 
-const ProdutosComponent = ({
-    favoritos,
-  favoritar
-}: Props) => {
+const ProdutosContainer = ({ favoritos, favoritar }: Props) => {
+  const { data: produtos, isLoading } = useGetProdutosQuery();
 
-  const { data: produtos, isLoading } = useGetProdutosQuery()
-  if (isLoading) return <h2>Carregando...</h2>
+  if (isLoading) return <h2>Carregando...</h2>;
+  if (!produtos || produtos.length === 0)
+    return <h2>Nenhum produto disponível</h2>;
+
+  // Otimização: transformando favoritos em um Set para melhor desempenho
+  const favoritosIds = new Set(favoritos.map((f) => f.id));
 
   const produtoEstaNosFavoritos = (produto: ProdutoType) => {
-    const produtoId = produto.id
-    const IdsDosFavoritos = favoritos.map((f) => f.id)
-
-    return IdsDosFavoritos.includes(produtoId)
-  }
+    return favoritosIds.has(produto.id);
+  };
 
   return (
-    <>
-      <S.Produtos>
-        {produtos?.map((produto) => (
-          <Produto
-            estaNosFavoritos={produtoEstaNosFavoritos(produto)}
-            key={produto.id}
-            produto={produto}
-            favoritar={favoritar}
-          />
-        ))}
-      </S.Produtos>
-    </>
-  )
-}
+    <S.Produtos>
+      {produtos.map((produto) => (
+        <Produto
+          estaNosFavoritos={produtoEstaNosFavoritos(produto)}
+          key={produto.id}
+          produto={produto}
+          favoritar={favoritar}
+        />
+      ))}
+    </S.Produtos>
+  );
+};
 
-export default ProdutosComponent
+export default ProdutosContainer;

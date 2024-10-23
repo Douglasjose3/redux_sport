@@ -3,14 +3,13 @@ import { RootReducer } from '../../store/indexStore'
 import { paraReal } from '../ParaReal/ParaReal'
 import * as S from './styles'
 
-
 import cesta from '../../assets/cesta.png'
 
 const Header = () => {
   const itens = useSelector((state: RootReducer) => state.carrinho.itens)
   //state do reducer //carrinho: queremos os itens //precisa configurar TS para trabalhar com o Redux
   //: RooterReduce é a tipagem
-  const favoritos = useSelector((state: RootReducer) => state.favorito.itens)
+  const favoritos = useSelector((state: RootReducer) => state.favoritar.itens)
   const valorTotal = itens.reduce((acc, item) => {
     acc += item.preco
     return acc
