@@ -6,11 +6,11 @@ import { paraReal } from "../ParaReal/ParaReal";
 
 type Props = {
   produto: ProdutoType;
-  favoritar: (produto: ProdutoType) => void; // Agora favoritar é uma função
+  favoritar: ProdutoType;
   estaNosFavoritos: boolean;
 };
 
-const ProdutoComponent = ({ produto, estaNosFavoritos }: Props) => {
+const ProdutoComponent = ({ produto, favoritar, estaNosFavoritos }: Props) => {
   const dispatch = useDispatch();
 
   return (
@@ -24,7 +24,7 @@ const ProdutoComponent = ({ produto, estaNosFavoritos }: Props) => {
       </S.Prices>
       <S.BtnComprar
         onClick={() =>
-          dispatch(estaNosFavoritos ? remover(produto) : adicionar(produto))
+          dispatch(estaNosFavoritos ? remover(favoritar) : adicionar(favoritar))
         }
         type="button"
       >
