@@ -5,7 +5,7 @@ import api from "../services/api";
 
 export const store = configureStore({
   reducer: {
-    //RooterReduce
+    // RooterReduce
     favoritar: favoritarReducer,
     carrinho: carrinhoReducer,
     [api.reducerPath]: api.reducer,
@@ -14,4 +14,4 @@ export const store = configureStore({
     getDefaultMiddleware().concat(api.middleware),
 });
 
-export type RootReducer = ReturnType<typeof store.getState>; //infêrencia de tipo //ele vai saber qual o tipo apropriado
+export type RootState = ReturnType<typeof store.getState>; //RootState exportado para capturar o tipo retornado pelo estado da store, útil para tipagem em hooks como useSelector.

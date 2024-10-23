@@ -16,15 +16,11 @@ const favoritarSlice = createSlice({
     adicionar: (state, action: PayloadAction<Produto>) => {
       const produto = action.payload;
       if (state.itens.find((p) => p.id === produto.id)) {
-        alert("Item já adicionado");
+        state.itens = state.itens.filter((p) => p.id !== produto.id);
       } else {
         state.itens.push(produto);
       }
     },
-    // remover: (state, action: PayloadAction<Produto>) => {
-    //     const favoriarId = action.payload.id;
-    //     state.itens = state.itens.filter((p) => p.id !== favoriarId);
-    // }
   },
 });
 
