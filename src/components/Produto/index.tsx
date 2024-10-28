@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Produto as ProdutoType } from "../../App";
 import * as S from "./styles";
-import { adicionar } from "../../store/reducers/favoritar";
 import { paraReal } from "../ParaReal/ParaReal";
 import { RootState } from "../../store/indexStore";
+import { adicionar } from "../../store/reducers/carrinho";
 import { favoritar } from "../../store/reducers/favoritar";
 
 type Props = {

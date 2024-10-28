@@ -5,6 +5,8 @@ import * as S from "./styles";
 
 type Props = {
   favoritos: ProdutoType[];
+  estaNosFavoritos: boolean;
+  favoritar: (produto: ProdutoType) => void;
 };
 
 const ProdutosContainer = ({ favoritos, favoritar }: Props) => {
